@@ -1,0 +1,400 @@
+/* ---------- Reset & base ---------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --gradient-purple: #7C5CFC;
+  --gradient-pink: #C24FD1;
+  --gradient-orange: #FF7A59;
+  --text-dark: #1E1B2E;
+  --text-muted: #6B7280;
+  --border-light: #E7E4F5;
+  --bg-page-start: #DCD3F7;
+  --bg-page-end: #FCDCC9;
+  --card-bg: #FFFFFF;
+  --danger: #E23E6B;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 40px 16px;
+  background: linear-gradient(135deg, var(--bg-page-start) 0%, var(--bg-page-end) 100%);
+  color: var(--text-dark);
+}
+
+/* ---------- Card ---------- */
+.app-card {
+  width: 100%;
+  max-width: 560px;
+  background: var(--card-bg);
+  border-radius: 20px;
+  padding: 32px;
+  box-shadow: 0 20px 50px rgba(60, 30, 90, 0.15);
+}
+
+/* ---------- Header ---------- */
+.app-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.app-logo {
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+  border-radius: 50%;
+}
+
+.app-title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.app-tagline {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* ---------- Form ---------- */
+.task-form {
+  display: flex;
+  gap: 10px;
+  background: #FAF9FE;
+  border-radius: 14px;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.input-wrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #FFFFFF;
+  border: 1.5px solid var(--gradient-purple);
+  border-radius: 10px;
+  padding: 0 14px;
+}
+
+.input-icon {
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.task-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 14px 0;
+  font-size: 0.95rem;
+  font-family: inherit;
+  color: var(--text-dark);
+  background: transparent;
+  min-width: 0;
+}
+
+.task-input::placeholder {
+  color: #A8A4BF;
+}
+
+.add-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: none;
+  border-radius: 10px;
+  padding: 0 22px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  background: linear-gradient(135deg, var(--gradient-purple), var(--gradient-pink));
+  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+  white-space: nowrap;
+}
+
+.add-btn:hover {
+  filter: brightness(1.08);
+  box-shadow: 0 6px 16px rgba(124, 92, 252, 0.35);
+}
+
+.add-btn:active {
+  transform: scale(0.97);
+}
+
+.add-btn-icon {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+/* ---------- Filter tabs ---------- */
+.filter-tabs {
+  display: flex;
+  background: #F5F3FB;
+  border-radius: 12px;
+  padding: 5px;
+  margin-bottom: 20px;
+  gap: 4px;
+}
+
+.filter-tab {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 10px 0;
+  border-radius: 9px;
+  font-family: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.filter-tab:hover {
+  color: var(--text-dark);
+}
+
+.filter-tab.active {
+  background: #E7E1FB;
+  color: var(--gradient-purple);
+}
+
+/* ---------- Task list ---------- */
+.task-list {
+  list-style: none;
+  border: 1px solid var(--border-light);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+  border-bottom: 1px solid var(--border-light);
+  background: #fff;
+  animation: fadeIn 0.2s ease;
+}
+
+.task-item:last-child {
+  border-bottom: none;
+}
+
+.task-checkbox {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  border: 2px solid #D5D1E8;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.task-checkbox svg {
+  opacity: 0;
+  transition: opacity 0.1s ease;
+}
+
+.task-item.completed .task-checkbox {
+  background: linear-gradient(135deg, var(--gradient-purple), var(--gradient-pink));
+  border-color: transparent;
+}
+
+.task-item.completed .task-checkbox svg {
+  opacity: 1;
+}
+
+.task-text {
+  flex: 1;
+  font-size: 0.95rem;
+  word-break: break-word;
+  cursor: pointer;
+}
+
+.task-item.completed .task-text {
+  text-decoration: line-through;
+  color: var(--text-muted);
+  opacity: 0.75;
+}
+
+.task-delete {
+  border: none;
+  background: transparent;
+  color: #B7B2CC;
+  cursor: pointer;
+  flex-shrink: 0;
+  padding: 4px;
+  display: flex;
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.task-delete:hover {
+  color: var(--danger);
+  transform: scale(1.08);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- Empty state ---------- */
+.empty-state {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  text-align: center;
+  padding: 48px 20px;
+  border: 1.5px dashed var(--border-light);
+  border-radius: 14px;
+  color: var(--text-muted);
+}
+
+.empty-state svg {
+  color: #C7C2DE;
+}
+
+.empty-state.show {
+  display: flex;
+}
+
+.task-list.hide {
+  display: none;
+}
+
+/* ---------- Footer ---------- */
+.app-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-light);
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.task-count {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9rem;
+  color: var(--text-dark);
+}
+
+.count-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #EDE8FB;
+  color: var(--gradient-purple);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.clear-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: none;
+  background: transparent;
+  color: var(--danger);
+  font-family: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+.clear-btn:hover {
+  opacity: 0.75;
+}
+
+/* ---------- Focus visibility (a11y) ---------- */
+.task-input:focus-visible,
+.add-btn:focus-visible,
+.filter-tab:focus-visible,
+.task-checkbox:focus-visible,
+.task-delete:focus-visible,
+.clear-btn:focus-visible {
+  outline: 2px solid var(--gradient-purple);
+  outline-offset: 2px;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 480px) {
+  body {
+    padding: 20px 10px;
+    align-items: flex-start;
+  }
+
+  .app-card {
+    padding: 22px 18px;
+    border-radius: 16px;
+  }
+
+  .app-logo {
+    width: 46px;
+    height: 46px;
+  }
+
+  .app-title {
+    font-size: 1.4rem;
+  }
+
+  .task-form {
+    flex-direction: column;
+  }
+
+  .add-btn {
+    padding: 12px 0;
+  }
+
+  .filter-tab {
+    font-size: 0.8rem;
+    padding: 9px 0;
+  }
+
+  .app-footer {
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+@media (min-width: 900px) {
+  .app-card {
+    max-width: 620px;
+    padding: 40px;
+  }
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
